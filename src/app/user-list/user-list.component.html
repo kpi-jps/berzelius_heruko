@@ -1,0 +1,28 @@
+<div class="modal"  [class.is-active] = "confirm == true" id="confirm">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+          <div class="content">
+            {{confirmMsg}}
+          </div>
+          <button class="button is-small is-danger" (click)="onDel()">Deletar</button> 
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click)="cancelDel()"></button>
+</div>
+
+
+<div class="content">
+    <h4 id="title">Lista de usuários cadastrados</h4>
+    <div class="has-background-info-light users" *ngIf="empty"> Não há outros usuários cadastrados!</div>
+    <div class="has-background-info-light users" *ngFor="let user of users">
+        <ul>
+            <li><b>Usuário: </b> {{user.name}}</li>
+            <li><b>Email: </b> {{user.email}}</li>
+            <li><b>Status: </b> {{user.adm | userStatus}}</li>
+        </ul>
+        <button class="button is-small is-info" (click) = "editUserStatus(user)"> Mudar status </button> 
+        <button class="button is-small is-danger" (click) = "initDel(user)">Deletar</button>
+    </div>
+</div>
+

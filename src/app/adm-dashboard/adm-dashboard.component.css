@@ -1,0 +1,47 @@
+#alert-container {
+    margin: 20px 0;
+    z-index:100;
+    position: fixed;
+    width: 100%;
+}
+#alert{
+    width: 60%;
+    margin: 10px auto;
+    text-align: center;
+}
+header{
+    width: 100%;
+}
+#title{
+    position: relative;
+    top: 10px;
+}
+#subtitle{
+    position: relative;
+    top: -10px;
+}
+#logo{
+    text-align: center;
+}
+#menu-bar {
+    width: 100%;
+    margin: 0;
+    padding: 12px;
+    border-bottom: 1px solid lightgray;
+}
+main {
+    width: 80%;
+    margin: 20px auto;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    min-height: 100px;
+    padding: 10px;
+}
+
+footer{
+    text-align: center; 
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+    border: 1px solid lightgray;
+}

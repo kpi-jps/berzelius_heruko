@@ -1,0 +1,46 @@
+<div class="modal"  [class.is-active] = "confirm == true" id="confirm">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+          <div class="content">
+            {{confirmMsg}}
+          </div>
+          <button class="button is-small is-danger" (click) = "onDel()">Deletar</button> 
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click)="cancelDel()"></button>
+</div>
+<div class="modal is-active" [class.is-active] = "process == true" id="order">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box">
+            <div id="title" class="content"><h4>Processando pedido</h4></div>
+            <div class="content">
+                <p> Pedido {{orderId}} </p>
+                <p>Produto: {{productName}}</p>
+                <p>Quantidade em estoque: {{productQuantity | setNum}} {{productUnity}}</p>
+                <p>Quantidade solicitada: {{orderQuantity | setNum}} {{productUnity}}</p>
+            </div> 
+                <button class="button is-small is-info" (click) = "processOrder()">Processar</button>
+            </div>    
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click) = "cancelProcess()"></button>
+</div>
+<div class="content">
+    <h4 id="title">Lista de pedidos cadastrados</h4>
+    <div class="has-background-info-light orders" *ngIf="empty"> Não há pedidos cadastrados!</div>
+    <div class="has-background-info-light orders" *ngFor="let order of orders">
+        <ul>
+            <li><b>Pedido: </b> {{order._id}}</li>
+            <li><b>Data:</b> {{order.createdAt | setDate}}</li>
+            <li><b>Produto:</b> {{order.name}}</li>
+            <li><b>Descrição:</b> {{order.description}}</li>
+            <li><b>Quantidade: </b> {{order.quantity | setNum }} {{order.unity}}</li>
+            <li><b>Status: </b> {{order.status}}</li>
+        </ul>
+        <div id="adm-control" *ngIf="activeUser.adm">
+            <button class="button is-small is-info" (click) = "initProcess(order)">Processar</button> 
+            <button class="button is-small is-danger" (click) = "initDel(order)">Deletar</button>
+        </div>
+    </div>
+</div>

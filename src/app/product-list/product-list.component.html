@@ -1,0 +1,101 @@
+<div class="modal"  [class.is-active] = "confirm == true" id="confirm">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+          <div class="content">
+            {{confirmMsg}}
+          </div>
+          <button class="button is-small is-danger" (click) = "onDel()">Deletar</button> 
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click)="cancelDel()"></button>
+</div>
+
+<div class="modal is-active" [class.is-active] = "edit == true" id="edit">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box">
+            <div id="title" class="content"><h4>Cadastrando reagente</h4></div>
+                <form id="form-edit"  [formGroup]="productForm" (submit)="onSubmitEdit()">
+                    <div class="field">
+                        <label class="label">Nome do reagente</label>
+                        <div class="control">
+                        <input class="input" type="text" formControlName="name" [placeholder]="namePlaceHolder">
+                        </div>
+                    </div>
+                
+                    <div class="field">
+                    <label class="label">Descrição</label>
+                    <div class="control">
+                        <input class="input" type="text" formControlName="description" [placeholder]="descriptionPlaceHolder">
+                    </div>
+                    </div>
+                
+                    <div class="field">
+                        <label class="label">Unidade</label>
+                        <div class="control">
+                        <input class="input" type="text" formControlName="unity" [placeholder]="unityPlaceHolder">
+                        </div>
+                    </div>
+                
+                    <div class="field">
+                    <label class="label">Quantidade</label>
+                    <div class="control">
+                        <input class="input" type="number" formControlName="quantity" [placeholder]="quantityPlaceHolder">
+                    </div>
+                    </div>
+                
+                    <div class="field">
+                        <label class="label">Observações</label>
+                        <div class="control">
+                        <textarea class="textarea" formControlName="obs" [placeholder]="obsPlaceHolder"></textarea>
+                        </div>
+                    </div>
+                    
+                    <button class="button is-info">Cadastrar</button>
+                </form>
+            </div>    
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click) = "cancelEdit()"></button>
+</div>
+<div class="modal is-active" [class.is-active] = "order == true" id="order">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box">
+            <div id="title" class="content"><h4>Pedindo reagente</h4></div>
+            <div class="content">
+                <p> {{productName}} </p>
+                <p>Quantidade em estoque: {{productQuantity | setNum}} {{productUnity}}</p>
+            </div> 
+                <form id="form-edit"  [formGroup]="orderForm" (submit)="onSubmitOrder()">
+                    <div class="field">
+                    <label class="label">Quantidade do pedido ({{productUnity}}) </label>
+                        <div class="control">
+                            <input class="input" type="number" formControlName="quantity" [placeholder]="quantityPlaceHolder">
+                        </div>
+                    </div>
+                    <button class="button is-info">Pedir</button>
+                </form>
+            </div>    
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click) = "cancelOrder()"></button>
+</div>
+<div class="content">
+    <h4 id="title">Lista de reagentes cadastrados</h4>
+    <div class="has-background-info-light products" *ngIf="empty"> Não há outros produtos cadastrados!</div>
+    <div class="has-background-info-light products" *ngFor="let product of products">
+        <ul>
+            <li><b>Reagente: </b> {{product.name}}</li>
+            <li><b>Descrição:</b> {{product.description}}</li>
+            <li><b>Quantidade: </b> {{product.quantity | setNum}} {{product.unity}}</li>
+            <li><b>Observações:</b> {{product.obs}}</li>
+        </ul>
+        <div id="user-control" *ngIf="!activeUser.adm">
+            <button class="button is-small is-info" (click) = "initOrder(product)"> Fazer pedido </button> 
+        </div>
+        <div id="adm-control" *ngIf="activeUser.adm">
+            <button class="button is-small is-info" (click) = "initEdit(product)">Editar</button> 
+            <button class="button is-small is-danger" (click) = "initDel(product)">Deletar</button>
+        </div>
+    </div>
+</div>

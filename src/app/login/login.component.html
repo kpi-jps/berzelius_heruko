@@ -1,0 +1,79 @@
+<div id="alert-container" *ngIf="alert">
+  <div class="notification" [class.is-success] = "success == true" [class.is-danger] = "error == true" id="alert">
+    <button class="delete" (click) = "closeAlert()"></button>
+    {{msg}}
+  </div>
+</div>
+
+<div class="box" id="login-box">
+    <div id="header">
+        <div id="logo"><img src="../assets/logo.svg" alt="logo" width="70" height="70"> </div>
+        <div class="content">
+            <h2>Berzelius*</h2>
+            <p>Gerenciamento de estoque de regentes químicos</p>
+        </div>
+    </div>
+    <div class="tabs is-centered">
+        <ul>
+            <li [class.is-active] = "access == true" (click)="activeAccess()">
+                <a> Acesso </a>
+            </li>
+            <li [class.is-active] = "register == true" (click)="activeRegister()">
+                <a> Cadastro </a>
+            </li>
+        </ul>
+    </div>
+    <form id="form-access" *ngIf="access" [formGroup]="formAccess" (submit)="onSubmitAccess()">
+        <div class="field">
+          <label class="label">Login</label>
+          <div class="control">
+            <input class="input" type="text" formControlName="loginAccess" [placeholder]="loginPlaceHolder">
+          </div>
+        </div>
+      
+        <div class="field">
+          <label class="label">Senha</label>
+          <div class="control">
+            <input class="input" type="password" formControlName="passwdAccess" [placeholder]="passwdPlaceHolder">
+          </div>
+        </div>
+      
+        <button class="button is-info">Acessar</button>
+    </form>
+
+    <form id="form-register" *ngIf="register" [formGroup]="formRegister" (submit) = onSubmitRegister()>
+        <div class="field">
+            <label class="label">Nome</label>
+            <div class="control">
+              <input class="input" type="text" formControlName="nameRegister" [placeholder]="namePlaceHolder">
+            </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control">
+            <input class="input" type="email" formControlName="emailRegister" [placeholder]="emailPlaceHolder">
+          </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Login</label>
+            <div class="control">
+              <input class="input" type="text" formControlName="loginRegister" [placeholder]="loginPlaceHolder">
+            </div>
+        </div>
+      
+        <div class="field">
+          <label class="label">Senha</label>
+          <div class="control">
+            <input class="input" type="password" formControlName="passwdRegister" [placeholder]="passwdPlaceHolder">
+          </div>
+        </div>
+        <button class="button is-info">Cadastrar</button>
+      </form>
+      <div class="content" id="footer">
+        <small><a href="https://en.wikipedia.org/wiki/J%C3%B6ns_Jacob_Berzelius" target="blank"> *Jöns Jacob Berzelius </a></small>
+      </div>
+</div>
+
+
